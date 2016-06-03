@@ -1,0 +1,52 @@
+research ideas for NemexA and NemexF
+
+- 	implement MassJoin and PassJoin
+
+- 	post filtering of "wrong" substrings, i.e., matched substrings that are in the wrong context, e.g.,
+	"present" -> "ent" matches because it is a dictionary entry
+	
+->	or is it possible to use/define some sort of "bordering" tokens, which can be used to define
+	starting/ending matching substrings?
+	
+-	ranking of candidates
+	- according to Faerie paper page 536, advantage of binary pruning
+		- the best similar pairs are those which share as many tokens as possible
+	  	- group all candidates based on the same number of tokens
+	  	- consider a group G_g with g tokens
+	  	- let T_g be a threshold computed on basis of |e| and g
+	  		 -> How exactly is this computed ?
+	  	- then we prune all elements in group G_g, if |P_e[pi, ..., pj]| < T_g
+	- check work done in un-supervised morphology
+	
+-> Do I have it by means of my selector interface ?
+
+Parallelize NemexF
+
+Disk-based version of NemexF
+	
+
+2016:
+*****
+
+Check top-k similarity search, sh auch ibooks
+
+NE identification mit nemexf ist buisiness - check more with topk and big data
+
+mining product names -> chunker auf review data etc.
+
+publications in e-commerce journal
+
+February, 2016
+**************
+
+My incremental algorithm is very close to the Signature-based framework algorithm for self-joins 
+described in Jiang, VLDB, 2014!
+-> incrementally builds the join set
+
+-> So, it should be possible to implement a version of pass-join of it.
+
+-> can be easily adpated to join two separate string sets R and S:
+	- build inverted index for R
+	- scan S and use index of R to compute the results
+
+Can I use it together with NemexF for bootstrapping/distance-supervision of NER?

@@ -1,0 +1,74 @@
+I. How to Build NEMEX?
+
+Please first install Maven. Then, in a terminal, change to the directory that contains the POM XML file and run the following command:
+
+mvn assembly:assembly
+
+mvn3 assembly:assembly on Mac OSX
+
+This will produce a JAR file called nemex.jar, a WAR file called nemex.war as well as all the libraries (i.e. dependencies). 
+They are also all packaged into one ZIP file called nemex-distribution.zip.
+
+II. How to use NEMEX as a library?
+
+If you add the above mentioned JAR file, called nemex.jar to the classpath, 
+you would be able to use it as a library in your Java application.
+
+III. How to use NEMEX as a standalone Java (J2SE) application?
+
+Simply run the main classes such as de.dfki.lt.nemex.Main_NemexA.
+
+IV. How to use NEMEX as a J2EE application?
+
+Install Apache tomcat or a similar application server. 
+Then, deploy the above mentioned WAR file, called nemex.war on the server. 
+Now, by starting Tomcat up, the NEMEX J2EE web application should be ready to use from the web browser:
+
+http://127.0.0.1:8080/nemex/
+
+
+V. How to use NEMEX via XML-RPC?
+
+XML-RPC is supported. A sample client is available at:
+
+de.dfki.lt.nemex.Test_XML_RPC.java
+
+--------------------------------------
+
+A number of current limitations:
+
+-Multiple concurrent users are not yet supported. Because, one user might unload a vocabulary which
+is in use by another one and no concurrency support is implemented.
+-Uploading users��� own vocabularies using the web-based UI is not yet possible.
+
+
+Using Tomcat:
+Benutzung von Tomcat
+
+cd /Library/Tomcat/Home/
+
+user: guenter
+password: tomcat2010
+
+configuration
+/Library/Tomcat/Home/conf
+
+edit best using editor nano
+
+sudo nano file
+
+start/stop tomcat server 
+
+/Library/Tomcat/Home/bin
+
+sudo ./startup.sh
+sudo ./shutdown.sh
+
+March, 2014:
+
+installed version is under: /Applications/apache-tomcat-7.0.52
+
+Start tomcat: bin/startup.sh
+Stop tomcat: bin/shutdown.sh
+
+Copy war file under ../webapps

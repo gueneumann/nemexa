@@ -1,0 +1,6 @@
+0 utf-8 EN 5 5
+1 -9.197762 kaushik#ch NG:1:-9.197762
+2 -9.197762 chakrabarti NG:1:-9.197762
+3 -9.197762 chaudhuri NG:1:-9.197762
+4 -9.197762 venkatesh NG:1:-9.197762
+5 -9.197762 surajit#ch NG:1:-9.197762

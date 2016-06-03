@@ -1,0 +1,99 @@
+Incremental approximate counting
+ - for each phrase phr do:
+ - store in dictionary with identifier phr_i
+ - for new candidate: phr'
+ 	
+ 	- do lookup with threshold TAU
+ 	
+ 	- if success, add new entry with identifier phr'_i from matching element (elements)
+ 		- do clustering
+ 		- increase frequency counter of phr_i
+ 	- if no success add phr'_j
+ 		- eventually add as new entry
+ 	
+ - for old entries: -> automatic deletion of elements that are too rare
+ 	- if not matched by newer entries for some time, then delete and store in "old entries"
+ 	- could be done via time slices, e.g., each new 10000 element
+ 	- if I use a counter t (representing time)
+ 		- then decrease t for all entries that do not match when inserting a new entry
+ 		- then delete on basis of largest negative values
+ 		
+-> NOTE: 
+	- this incremental method is very similar to the PASS-JOIN algo in VLDB, 2012, 
+	  cf. papers in NEREID/SSjoin/2012-p253_guoliangli_vldb2012.pdf
+	- and similar to the TASTE system for ADM, see also dfki/src/Lisp/src/nereid-taste.lisp
+
+MARCH, 2015
+***********
+
+- to support online creation of a dictionary based in similarity lookup do:
+	I think it can also handle string similarity join when used with threshold<= 1, 
+	if I would keep a list of the similar strings.
+
+- create empty dictionary with settings "0 utf-8 EN 0 0"
+
+- Then, for a new entry, which is just a string + Type (which could also be a default) do:
+	- do similarity lookup with threshold = 1
+		- if no entry found
+			- create entry
+			- set frequency = 1
+			- update dictionary general information
+		- if entry found
+			- if entry has Type
+				- update frequency
+				- update dictionary information
+			- if entry does not has Type
+				- entry Type information
+				- set frequency = 1
+				- update dictionary information
+	
+	- do similarity lookup with threshold = < 1
+		- if no entry found
+			- create entry
+			- set frequency = 1
+			- update dictionary general information
+		- if entry found
+			- entry will be a list of matching entries
+			- the list is considered to be an equivalence class
+			- define which of the entry should be the core entry 
+				-> can I have multiple core entries ?
+				-> is this the same as similarity join
+			- insert core entry and delete the others
+			- update dictionary  information
+			
+About dictionary entries:
+- a dictionary is a hashmap of index:content
+- content is: ["-9.197762", "abacterial#abdominoperineal", "NG:1:-9.197762", "NG:1:657"]
+- if I have a new entry, it is of form
+	entry=["abacterial#abdominoperineal", "NG"]
+
+
+- in order to implement the above, I can create an IncrementelInvertedIndex class
+- that performs the above steps for each new entry
+	- it looks up entry in the current inverted index
+	- and adds or updates the new entry
+	- for existing entries, I will define generic methods for incremental update of the content of an entry
+		- for updating a reading
+		- I do this such that I can later change the format. Methods
+			- find reading
+			- update reading 
+			- update absolute statistics
+		
+- the IncrementelInvertedIndex can then be used in a different controller, e.g., for clustering or building a dictionary
+	from a text stream of text fragments
+	
+January, 2016
+*************
+
+I have a version for creating a standard nemex gazetteer using "build-in" threshold 1.
+
+cf. nemex.data.NemexGazetteer.java
+
+it already builds readings and computes frequencies;
+but it uses exact match;
+
+in this way, it may happen, that similar entries (spelling variations/erros) count as different entries.
+
+Question: Can I use this as basis for approximate gazetteer creation?
+
+	

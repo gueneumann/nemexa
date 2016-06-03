@@ -1,0 +1,74 @@
+************** Structure of Gazetter
+Java class: /nemexa/src/main/java/de/dfki/lt/nemex/a/data/Gazetteer.java
+
+- Lexical entries
+	hashmap(index, list(String))
+	0th entry keeps meta info about lexicon, e.g., 
+		0 utf-8 EN 4 4 XYZ 
+	NOTE only first 5 elements are interpreted
+	
+	i-the entries represent lexical information, e.g.,
+		1 -9.197762 abacterial#abdominoperineal NG:1:-9.197762 NG:1:657
+		->
+		index := 1
+		list(String) := ["-9.197762", "abacterial#abdominoperineal", "NG:1:-9.197762", "NG:1:657"]
+		access is via position in arrayList
+		
+	entries are not validated!
+		when loaded, e.g., merging readings is not done for entries with same lemmas
+		when entry would be updated
+
+1.)
+when loading a Gazetteer in txt mode, say ahm.txt  
+
+0 utf-8 EN 4 4
+1 -9.197762 abacterial#abdominoperineal NG:1:-9.197762
+2 -9.197762 abdominals NG:1:-9.197762
+3 -9.197762 abdominis NG:1:-9.197762
+4 -9.197762 abdominoperineal NG:1:-9.197762
+
+
+the constructed Gazetteer object stores all the lexical elements
+as hash map using the entry's index as index and the exploded string as entry, viz as array list. 
+
+In doing so, it uses the 0-th entry for keeping meta information about the Gazetteer by 
+hard-coded interpretation of the first 5 elements of such an entry like
+0 utf-8 EN 4 4
+
+the other entries are just internalized to a  list of strings:
+1 -9.197762 abacterial#abdominoperineal NG:1:-9.197762
+->
+["-9.197762", "abacterial#abdominoperineal", "NG:1:-9.197762"]
+
+Then, the inverted index is build from the ith (i => 1) elements using the 2nd slot of each entry for constructing the entry.
+
+NOTE: index is not further kept in an entry, because it is redundant now when used in inverted index
+NOTE: The entry ID-list in an inverted index contains entries with index ID-1 !!
+NOTE: for NemexA this works when retrieving the lexical content, make sure also for NemexF
+
+
+3.) 
+Concerning the empty Gazetteer (or basically any Gazetteer), updating a Gazetteer by means of new entries is supposed to be
+done by  method addNewEntry().
+
+In this case, it seems that it is assumed that the new entry is a string of form 
+"1 -9.197762 abacterial#abdominoperineal NG:1:-9.197762"
+
+Here, it seems, that we first have to check whether the current Gazetteer already contains an entry 
+with same token list (e.g, "abacterial#abdominoperineal") and if not so, increases a counter. 
+(by the way: this looks suboptimal because we have to iterate through the complete gazeetteer for each new entry. 
+And furthermore:
+would a break in the loop at least stop once you have found an entry with same token list ? GN: Yes!)
+
+Then we add that new entry as new last element to the Gazetteer independently of the fact 
+that an entry with same token list exists (in which case one could overwrite it) or not. Correct ?
+
+In any case, I think I have to improve this functionality so that it can process 
+Internal entry (represented as list of strings) and probably a bit faster, e.g., 
+using a bidirectional map between index and token-list.
+
+- ABOUT statistics
+	- in principle, it is enough to store absolute frequencies
+	- together with the global information, it would be easy to compute relFreq !
+	- since I am currently NOT using content of entries, it should be easy to adapt current dictionaries and future ones
+	- so that relFreq is considered and computed temporarily 

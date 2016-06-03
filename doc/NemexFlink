@@ -1,0 +1,7 @@
+Feb, 2016:
+
+How to make NemexF distributable with Flink?
+
+- splitting of dictionary 
+- splitting of text files
+- using span information to group and combine found entries

@@ -1,0 +1,60 @@
+<html>
+<head>
+<title>Welcome to NEMEX!</title>
+</head>
+<body>
+<h1>Welcome to NEMEX!</h1>
+<h3>DFKI Language Technology (LT) Lab.'s Playground for Text Mining, Information Extraction, RTE, etc.</h3>
+
+<form action = "NemexLoadVocabs" method = "get">
+<p>
+	<label>
+	Please choose an available vocabulary to be loaded:<br />
+	</label>
+<select name = "vocabulary">
+<optgroup label="Small Vocabularies">
+<option value="MedicalTerms-mwl-plain.txt">MedicalTerms-mwl-plain.txt</option>
+</optgroup>
+<optgroup label="Medium Vocabularies">
+<option value="GeneLexicon-mwl-plain.txt">GeneLexicon-mwl-plain.txt</option>
+</optgroup>
+<optgroup label="Large Vocabularies">
+<option value="all-dblp-mwl-plain.txt">all-dblp-mwl-plain.txt</option>
+</optgroup>
+</select>
+</p>
+
+<h3>Configurations:</h3>
+<p>
+<label>
+	Delimiter:
+	<br /><input type = "text" name = "delimiter" value = "#" />	
+</label>
+</p>
+
+<p>
+	Switch the delimiter off?
+	<br>
+    <input type="radio" name="delimiterSwitchOff" value="true" checked>True<br>
+    <input type="radio" name="delimiterSwitchOff" value="false">False
+</p>
+
+<p>
+<label>
+	N-Gram Size:
+	<br /><input type = "text" name = "nGramSize" value = "3" />	
+</label>
+</p>
+
+<p>
+	Ignore Duplicate N-Grams in the grams set?
+	<br>
+    <input type="radio" name="ignoreDuplicateNgrams" value="true">True<br>
+    <input type="radio" name="ignoreDuplicateNgrams" value="false" checked>False
+</p>
+
+
+<input type = "submit" value = "Load"><input type = "reset">
+</form>
+</body>
+</html>

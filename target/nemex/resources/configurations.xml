@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<nemex>
+	<nemex-a>
+		<queryString>subtype</queryString>
+		<gazetteerFilePath>src/main/webapp/resources/MedicalTerms-mwl-plain.txt</gazetteerFilePath>
+		<delimiter>#</delimiter>
+		<delimiterSwitchOff>true</delimiterSwitchOff>
+		<nGramSize>3</nGramSize>
+		<ignoreDuplicateNgrams>false</ignoreDuplicateNgrams>
+		<similarityMeasure>COSINE_SIMILARITY_MEASURE</similarityMeasure>
+		<similarityThreshold>0.90</similarityThreshold>
+	</nemex-a>
+	<nemex-f>
+		<queryString>dominican</queryString>
+		<gazetteerFilePath>src/main/webapp/resources/ahm.txt</gazetteerFilePath>
+		<delimiter>#</delimiter>
+		<delimiterSwitchOff>false</delimiterSwitchOff>
+		<nGramSize>3</nGramSize>
+		<ignoreDuplicateNgrams>false</ignoreDuplicateNgrams>
+		<similarityMeasure>COSINE</similarityMeasure>
+		<similarityThreshold>0.90</similarityThreshold>
+	</nemex-f>
+</nemex>

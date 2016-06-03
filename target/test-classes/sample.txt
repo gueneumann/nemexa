@@ -1,0 +1,17 @@
+EU NNP
+rejects VBZ
+German JJ
+call NN
+Peter NNP
+Blackburn NNP
+U.N. NNP
+official NN
+Ekeus NNP
+heads VBZ 
+for IN 
+Baghdad NNP
+Baghdad NNP
+Baghdad NNP
+Baghdad#Town VERB
+EU NNP
+heads NN

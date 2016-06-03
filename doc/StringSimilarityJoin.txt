@@ -1,0 +1,75 @@
+PASS-JOIN
+Partition scheme:
+
+- using edit distance T, partition string into T+1 disjoint segments
+- use even partition and decompose strings into segments
+- for two strings s and r, they need to share at least one segment to be similar 
+
+- PASS-JOIN works as follows:
+
+- for N strings S, sort them according to length and  alphabetically
+	- means all strings are known when they are compared
+
+- then loop through the sorted list, for each s do:
+	- loop through all inverted indices L_i_l with |s| - TAU <= l <= |s|
+	- compute substrings(s) and select among them which gives set W(s,L_i_l)
+		- for each w: check whether it is in L_i_l and if so compute candidate pairs <s,r>
+		- verify pairs using ed(r,s)
+
+- Possible implementation:
+  - incrementally build length-chunk index for first N strings (e.g., N=10000)
+  	- alphabetically sort the strings in the l-sets
+  - Compute l_min and l_max;
+
+  - call PASS-join on sorted l-sets (could be done as external process -> map reduce approach possible)
+  
+  - combine results of different candidate sets
+  
+NOTE: This is already a map-reduce approach, but simulated with time-line
+(GOOD - since they propose now MASS-JOIN, I understood their ideas)
+  
+
+Inverted index:
+  	- partition string s into TAU+1 segments i
+  	- use length l(s) as index -> create vector L in increasing order
+  		- and then use positions of segments i in s as index -> each L-field l is a vector S_l of segment positions; 
+  			this vector has size TAU+1
+  		- and then insert all segments i in field S_L_i -> 
+  			all segments at position i of strings with length l
+  			NOTE: strings are sorted, so also the segments
+  		- and then all strings in l are inserted into hash field of correspondence segment
+  		
+  - for new string s, compute possible substrings which are used as retrieval query into this index
+  	- first, compute length of len(s)=s_l
+  	- length restriction: then determine left/right length boundaries l for s using TAU
+  	- compute all substrings from s given l and match agains inverted index:
+  	- shift restrictions: each segment i has a position p_i, so filter out substrings 
+  		that overlap between two positions
+  		- that is only substrings with start positions [p_i - tau, p_i + tau] and length l_i are considered
+  		- that is I compute the start position of substring s by using 
+  			the position of the segments in the index MINUS/PLUS TAU
+  	- min/max start position:
+  		- the idea is to determine a substring and if it matches with some segment, 
+  			then determine distance of left and right parts between s and r
+  		- when a match is found, then check edit distance of left/right parts (basically check their length difference!) 
+  			of strings r and s
+  		- if the sum of the distances of left parts ande right parts are larger than TAU, 
+  			we can prune the string s, because it cannot be similar to r
+  	- min/max is similar to the approach in FAERIE -> binary-shift operation, but also enumerate-candidate-pairs
+  
+  - verification:
+  	- improvement of dynamic algorithm using length-difference and prefix sharing
+  	- could be possible to integrate it into Ualign
+ 
+ - PASS-JOIN only needs relative small memory footprint also because it is incremental and 
+ 	can remove fully visited indices (much better than tries)
+ - So, I might try implementing a version of it soon
+ 	- i can also combine it with clustering methods then
+ 
+MASS-JOIN:
+
+- uniform similarity join
+- map reduce framework
+	
+   
+   

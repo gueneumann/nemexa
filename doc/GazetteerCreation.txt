@@ -1,0 +1,37 @@
+November, 2015:
+
+Comments from Madumita:
+
+I've tested the code to generate a Nemex gazetteer from a text file containing the annotation strings and their POS tags.
+
+I have not implemented one function within the class NemexGazetteer because it would be task specific. 
+This function should create a text file from a corpus. 
+
+This text file would be created in the following manner: 
+The corpus should be annotated to identify the required strings, for example, Named entities. 
+These annotated strings should be written to a separate file, such that every new line contains the string, 
+where the white space characters should be replaced with a delimiter, followed by a space, and then the corresponding sense/POS tag.  
+The class NemexGazetteer should be extended to implement this function.
+
+I have tested the generation of gazetteers once we have this file 
+( in the test class, I have used a sample file for this purpose.)
+
+After implementing this function, a suitable constructor call should be made to generate the gazetteer, 
+similar to the test class that I have added.
+
+Usage:
+
+The idea that we would compute relative frequencies of a string (maximum likelihood), 
+for the string itself and for its readings, i.e., if we have a document with entries 
+„April“ that occurs four times, three times with NE tag PER and one time with tag MONTH, 
+then, does this mean that you compute first a file
+
+„April“ PERS
+„April“ PERS
+„April“ PERS
+„April“ MONTH
+
+and then from this you compute the Nemex entry in the known form with its relative 
+frequency and with all seen tags of the entry, i.e, something like this:
+
+id „April“ relFreq PERS:relFreq:MONTH:relFreq

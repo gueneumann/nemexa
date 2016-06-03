@@ -1,0 +1,5 @@
+0 utf-8 EN 4 4
+1 -9.197762 abacterial#abdominoperineal NG:1:-9.197762
+2 -9.197762 abdominals NG:1:-9.197762
+3 -9.197762 abdominis NG:1:-9.197762
+4 -9.197762 abdominoperineal NG:1:-9.197762
