@@ -1,0 +1,4 @@
+GN, 2019:
+
+why is loading of dics for NemexF slower than for NemexA ?
+

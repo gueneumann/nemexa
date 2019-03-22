@@ -196,8 +196,6 @@ public class NEMEX_A {
 		/*
 		 * Generate the n-grams (i.e. the feature set X) for the query string x.
 		 */
-		long startQueryStringGramGenerationTime = System.currentTimeMillis();
-
 		CharacterNgram characterNgram = null;
 		if (!invertedList.isIgnoreDuplicateNgrams()) {
 			characterNgram = new CharacterNgramWithDuplicate(queryString,
@@ -207,12 +205,12 @@ public class NEMEX_A {
 					invertedList.getnGramSize());
 		}
 		// characterNgram.printNgrams();
-		long endQueryStringGramGenerationTime = System.currentTimeMillis();
+		
 
 		/*
 		 * Check the similarity
 		 */
-		long startSimilarityTime = System.currentTimeMillis();
+		
 
 		ApproximateStringSimilarityImpl approximateStringSimilarity = null;
 		if (similarityMeasure.equals(SimilarityMeasure.DICE_SIMILARITY_MEASURE)) {
@@ -247,8 +245,6 @@ public class NEMEX_A {
 		{System.err.println("Unknown ApproximateStringSimilarityImpl: " + similarityMeasure);
 
 		}
-
-		long endSimilarityTime = System.currentTimeMillis();
 
 		return similarEntries;
 
