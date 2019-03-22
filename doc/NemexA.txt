@@ -1,0 +1,16 @@
+GN 2019:
+
+
+Add comments to NemexA.
+
+
+NOTE:
+
+NemexA and NemexF vocabulary structures are the same but loading is slower for NemexF than for NemexA
+
+Idea of NemexA and using it on texts:
+
+When loading a new dictionary, create a POS analysis of the entries and infer regular patterns and lower and upper length bounds.
+
+Then do POS tagging on text and then extract candidates on basis of dictionary fingerprints.
+
