@@ -106,12 +106,6 @@ public abstract class ApproximateStringSimilarityImpl implements
 	public List<String> doApproximateStringMatchingUsingCPMerge(
 			double similarityThreshold) {
 		
-
-		
-		
-//		System.out.println("[INFO] Algorithm: CPMerge");
-//		System.out.println("[INFO] Similarity Threshold: "
-//				+ similarityThreshold);
 		List<Long> finalRetrievalListLongs = new ArrayList<Long>();
 		List<String> finalRetrievalListStrings = new ArrayList<String>();
 

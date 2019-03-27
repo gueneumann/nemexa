@@ -3,14 +3,55 @@ GN 2019:
 
 Add comments to NemexA.
 
+About NemexA implementation:
+
+;;; ********************************************************************************
+;;; top-level function ala OkazakiTsujii, Coling 2010
+
+;;; ********************************************************************************
+;;;  CPMerge algorithm -> the fast version 
+
+;;;  1. sortiere die ngram der query aufsteigend nach der Länge ihrer inverted index
+;;;  2. speicher die strings der sortierten NGRAM  k= 0 bis (|X|- min-overlaps) (k also index auf sortierte NGRAMs)
+;;;     (also die Strings der NGRAM, die kleine inverted Listen haben) -> HASH Array M
+;;;  3. Für die restlichen NGRAMS k = (|X|- min-overlaps +1) bis (|X|-1) 
+;;;     (also die NGRAMS mit längeren inverted indices und größerem Overlap)
+;;;     4. Für jeden String in M
+;;;        5. Schaue nach (binary search), ob s in NGRAM-inverted index ist, wenn ja, erhöhe Frequency in M(s)
+;;;        6. wenn M(s) >= min-overlaps ist, dann append s zu R und entferne s aus M 
+;;;           (dass macht das hash kleiner und ich muss s
+;;;           für andere NGRAMS nicht mehr betrachten -> Dupliakte werden auch entfernt ?)
+;;;        7. else if M(s)+(|X|-k-1) < min-overlaps entferne s aus M
+
 
 NOTE:
 
 NemexA and NemexF vocabulary structures are the same but loading is slower for NemexF than for NemexA
 
+  - check use of boolean delimiterSwitchOff = true;
+  - for NemexA it makes sense, because I no that I query a candidate entry, and so using # can be useful
+  - in case of NemexF, I do not know the entries but have to compute them, so using # would lead to different behaviour than expected
+  
+- eventually, different implementations of 
+  de.dfki.lt.nemex.f.data.NemexFIndex.loadNewGazetteer(String, String, Boolean, int, Boolean)
+    de.dfki.lt.nemex.f.data.InvertedList_FAERIE_charBased.InvertedList_FAERIE_charBased(Gazetteer, int, boolean)
+  de.dfki.lt.nemex.a.NEMEX_A.loadNewGazetteer(String, String, Boolean, int, Boolean)
+    de.dfki.lt.nemex.a.data.InvertedList.InvertedList(Gazetteer, int, boolean)
+    
+-> I think the major difference is that in NemexF the inverted index can not be organzied with length information, where the NemexA additional has this information.
+
+this.invertedIndex = new HashMap<String, List<Long>>(); 
+
+vs.
+ 
+this.invertedIndex = new HashMap<String, Map<Integer, List<Long>>>();
+
+
+HIERIX
+
 Idea of NemexA and using it on texts:
 
-When loading a new dictionary, create a POS analysis of the entries and infer regular patterns and lower and upper length bounds.
+- When loading a new dictionary, create a POS analysis of the entries and infer regular patterns and lower and upper length bounds.
 
-Then do POS tagging on text and then extract candidates on basis of dictionary fingerprints.
+- Then do POS tagging on text and then extract candidates on basis of dictionary finger prints.
 

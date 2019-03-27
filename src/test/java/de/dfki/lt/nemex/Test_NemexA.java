@@ -50,7 +50,7 @@ public class Test_NemexA {
 		int nGramSize = 4;
 		
 		String similarityMeasure = SimilarityMeasure.COSINE_SIMILARITY_MEASURE;
-		double similarityThreshold = 0.9;
+		double similarityThreshold = 0.5;
 		
 		String delimiter = "#";
 		String dictionaryFile = "/Users/gune00/data/AmplexorData/CSD_Data_Delivery_v1/Controlled_Vocabulary/entriesType-nemex.txt";
@@ -66,7 +66,7 @@ public class Test_NemexA {
 		System.out.println("Processing query  with settings");
 		time1 = System.currentTimeMillis();
 		
-		String queryString = "Rh#incompatibility#reaction,#unspecified";
+		String queryString = "Rh incompatibility reaction, unspecified";
 		
 		List<String> similarEntries = NEMEX_A.checkSimilarity(queryString, dictionaryFile, similarityMeasure, similarityThreshold);
 		

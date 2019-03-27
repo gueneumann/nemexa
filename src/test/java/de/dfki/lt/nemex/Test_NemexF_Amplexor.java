@@ -40,7 +40,7 @@ public class Test_NemexF_Amplexor {
 
 		nemexFBean.setnGramSize(4);
 		nemexFBean.setSimilarityMeasure(SimilarityMeasure.COSINE_SIMILARITY_MEASURE);
-		nemexFBean.setSimilarityThreshold(0.8);
+		nemexFBean.setSimilarityThreshold(0.5);
 		// END of parameter setting
 
 		// set aligner method
