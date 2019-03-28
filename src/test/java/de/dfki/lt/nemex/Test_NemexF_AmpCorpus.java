@@ -38,9 +38,9 @@ public class Test_NemexF_AmpCorpus {
 	
 	private int fileCnt = 0;
 
-	public String inDir = "/Users/gune00/data/AmplexorData/EMA_EPAR_sentences";
+	public String inDir = "/local/data/AmplexorData/EMA_EPAR_sentences";
 
-	public String dictionary = "/Users/gune00/data/AmplexorData/CSD_Data_Delivery_v1/Controlled_Vocabulary/entriesType-nemex.txt";
+	public String dictionary = "/local/data/AmplexorData/CSD_Data_Delivery_v1/Controlled_Vocabulary/entriesType-nemex.txt";
 
 	public void initNemex(int ngramSize, String simFunction, double similarityThreshold) {
 		long time1;
@@ -119,7 +119,7 @@ public class Test_NemexF_AmpCorpus {
 			}
 		}
 		time2 = System.currentTimeMillis();
-		System.out.println("System time (msec) while corpus: " + (time2 - time1));
+		System.out.println("System time (msec) whole corpus: " + (time2 - time1));
 	}
 
 	public static void main(String[] args) throws IOException {
