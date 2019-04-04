@@ -11,4 +11,8 @@ Next:
 
 Write out found matches
 
+Using ngram=5, lowercased dictionary, SimilarityMeasure.COSINE_SIMILARITY_MEASURE, 0.9
 
+18473935 in 5,13164861111 hours
+
+1490 msec pro document

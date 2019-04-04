@@ -38,7 +38,8 @@ NemexA and NemexF vocabulary structures are the same but loading is slower for N
   de.dfki.lt.nemex.a.NEMEX_A.loadNewGazetteer(String, String, Boolean, int, Boolean)
     de.dfki.lt.nemex.a.data.InvertedList.InvertedList(Gazetteer, int, boolean)
     
--> I think the major difference is that in NemexF the inverted index can not be organzied with length information, where the NemexA additional has this information.
+-> I think the major difference is that in NemexF the inverted index can not be organzied with length information, 
+   where the NemexA additional has this information.
 
 this.invertedIndex = new HashMap<String, List<Long>>(); 
 
@@ -55,3 +56,6 @@ Idea of NemexA and using it on texts:
 
 - Then do POS tagging on text and then extract candidates on basis of dictionary finger prints.
 
+- NOTE: NemexA uses n-grams for all similarity functions ; but does not consider edit distance;
+
+- But it considers the algorithm as complete, so no extra verification necessary.

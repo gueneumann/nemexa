@@ -364,3 +364,24 @@ I get strange results, e.g., [36,46]: [3]; membership; [-9.197762, venkatesh, NG
 	-> Correct ? not yet, but gets fewer elements
 	-> so, DO I build inverted index correctly ? and compute ngrams correctly?
 -> DO I USE indexing of sublist (starting from 0) and pos-list (starting from 1) correct ? in all aligners etc.? 
+
+GN, April 2019:
+
+I think, in case of ED and EDS I can use the ngram index, but in case of the others, I should use
+token-based index. See Faerie paper !!!
+
+Thus, I need to parameterize NemexF in this respect when
+- creating the index
+- creating the heap
+
+Thus, when I change the similarity function I need to recompute the inverted index of the dictionary.
+
+And then it might be the case that I need a final verify check at least for ED and EDS using Palign
+
+Thus, what I have sp far is basically a version were I use for ALL similarity function N-GRAMs
+
+I THIN WHAT I HAVE DONE IS TO AUGMENT CPmerge (NemexA) to FAERIE or better to document level.
+
+NOTE: I have c++ simstring code under work/simstring
+
+
