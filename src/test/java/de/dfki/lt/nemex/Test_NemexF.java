@@ -56,12 +56,8 @@ public class Test_NemexF {
 
 //		// NE-List:
 		nemexFBean.setnGramSize(3);
-		nemexFBean.setSimilarityMeasure(SimilarityMeasure.COSINE_SIMILARITY_MEASURE);
-		nemexFBean.setSimilarityThreshold(0.8);
-		
-//		nemexFBean.setnGramSize(3);
-//		nemexFBean.setSimilarityMeasure(SimilarityMeasure.ED_SIMILARITY_MEASURE);
-//		nemexFBean.setSimilarityThreshold(1);
+		nemexFBean.setSimilarityMeasure(SimilarityMeasure.EDS_SIMILARITY_MEASURE);
+		nemexFBean.setSimilarityThreshold(0.99);
 		
 //		// "/Users/gune00/data/NE-Lists/pantelWikiListSeeds.txt"
 		nemexFBean.setGazetteerFilePath("/Users/gune00/data/NE-Lists/CrossNER/all.txt");
@@ -87,19 +83,7 @@ public class Test_NemexF {
 		// initialize controller
 		NemexFController controller = new NemexFController(nemexFBean);
 		// create ngram list of input string
-		controller.setCharacterNgramFromQueryString(nemexFBean.getQueryString());		
-		
-		// define aligner
-		nemexFBean.setAligner(new de.dfki.lt.nemex.f.aligner.BucketCountPruneAligner());
-		System.out.println(nemexFBean.toString());
-		
-		time1 = System.currentTimeMillis();
-		controller.reset();
-		controller.process();
-		controller.selectCandidates();
-		time2 = System.currentTimeMillis();
-		controller.printSelectedCandidates();
-		System.out.println("System time (msec): " + (time2-time1));
+		controller.setCharacterNgramFromQueryString(nemexFBean.getQueryString());
 		
 		// define aligner
 		nemexFBean.setAligner(new de.dfki.lt.nemex.f.aligner.BinaryCountPruneAligner());
