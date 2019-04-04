@@ -5,10 +5,13 @@ import de.dfki.lt.nemex.f.data.NemexFBean;
 import de.dfki.lt.nemex.f.similarity.SimilarityMeasure;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
 /*
  * 
@@ -41,6 +44,8 @@ public class Test_NemexF_AmpCorpus {
 	public String inDir = "/local/data/AmplexorData/EMA_EPAR_sentences";
 
 	public String dictionary = "/local/data/AmplexorData/CSD_Data_Delivery_v1/Controlled_Vocabulary/entriesType-nemex.txt";
+	
+	public String outFile = "/local/data/AmplexorData/EMA_EPAR_nemexMatches.txt";
 
 	public void initNemex(int ngramSize, String simFunction, double similarityThreshold) {
 		long time1;
@@ -69,7 +74,7 @@ public class Test_NemexF_AmpCorpus {
 		System.out.println("System time (msec): " + (time2 - time1));
 	}
 
-	public void withAmpFilequeryNemex(File ampFile) throws IOException {
+	private void withAmpFilequeryNemex(File ampFile) throws IOException {
 
 		String line = "";
 		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(ampFile), "utf-8"));
@@ -79,9 +84,30 @@ public class Test_NemexF_AmpCorpus {
 		System.out.println("Processing file " + this.fileCnt++ + ": " + ampFile.getName());
 
 		while ((line = reader.readLine()) != null) {
-			//System.out.println(line);
 			this.queryWithNemex(line);
-			//this.controller.printSelectedCandidates();
+		}
+
+		time2 = System.currentTimeMillis();
+		System.out.println("System time (msec): " + (time2 - time1));
+
+		reader.close();
+	}
+	
+	private void withAmpFilequeryNemexOutput(File ampFile, BufferedWriter writer) throws IOException {
+
+		String line = "";
+		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(ampFile), "utf-8"));
+		long time1;
+		long time2;
+		time1 = System.currentTimeMillis();
+		System.out.println("Processing file " + this.fileCnt++ + ": " + ampFile.getName());
+
+		while ((line = reader.readLine()) != null) {
+			this.queryWithNemex(line);
+			writer.write(line);
+			writer.newLine();
+			writer.write(this.controller.getCandidates().toString());
+			writer.newLine();
 		}
 
 		time2 = System.currentTimeMillis();
@@ -103,10 +129,14 @@ public class Test_NemexF_AmpCorpus {
 		controller.selectCandidates();
 	}
 
-	public void processAmpCorpusDir(String inDir) throws IOException {
+	public void processAmpCorpusDir(String inDir, String outfilename) throws IOException {
 		File path = new File(inDir);
 
 		File[] files = path.listFiles();
+		
+		File outFile = new File(outfilename);
+		BufferedWriter writer = 
+				new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFile), "utf-8"));
 		
 		long time1;
 		long time2;
@@ -115,7 +145,7 @@ public class Test_NemexF_AmpCorpus {
 		
 		for (int i = 0; i < files.length; i++) {
 			if (files[i].isFile()) {
-				this.withAmpFilequeryNemex(files[i]);
+				this.withAmpFilequeryNemexOutput(files[i], writer);
 			}
 		}
 		time2 = System.currentTimeMillis();
@@ -125,10 +155,9 @@ public class Test_NemexF_AmpCorpus {
 	public static void main(String[] args) throws IOException {
 
 		Test_NemexF_AmpCorpus testRun = new Test_NemexF_AmpCorpus();
-		testRun.initNemex(4, SimilarityMeasure.COSINE_SIMILARITY_MEASURE, 0.9);
-
+		testRun.initNemex(5, SimilarityMeasure.COSINE_SIMILARITY_MEASURE, 0.9);
 		
-		testRun.processAmpCorpusDir(testRun.inDir);
+		testRun.processAmpCorpusDir(testRun.inDir, testRun.outFile);
 
 	}
 

@@ -9,9 +9,10 @@ public class AmplexorGazetteerTest {
 		String corpus = null;
 
 		if (null == corpus) {
-			String entriesFile = "/Users/gune00/data/AmplexorData/CSD_Data_Delivery_v1/Controlled_Vocabulary/entriesType.txt";
-			String nemexGazetteer = "/Users/gune00/data/AmplexorData/CSD_Data_Delivery_v1/Controlled_Vocabulary/entriesType-nemex.txt";
+			String entriesFile = "/local/data/AmplexorData/CSD_Data_Delivery_v1/Controlled_Vocabulary/entriesType.txt";
+			String nemexGazetteer = "/local/data/AmplexorData/CSD_Data_Delivery_v1/Controlled_Vocabulary/entriesType-nemex.txt";
 
+			AmplexorGazetteer.loweCase = true;
 			new AmplexorGazetteer(entriesFile, nemexGazetteer);
 		}
 	}

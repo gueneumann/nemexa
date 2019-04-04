@@ -7,6 +7,9 @@ ngram=4, SimilarityMeasure.COSINE_SIMILARITY_MEASURE, 0.9
 
 5049,38 msec pro document
 
+Next: check output of some examples
+
+
 Processing file 11194: temozolomide-accord_en_A3A.Labelling.22.txt
 System time (msec): 14
 Processing file 11195: flebogamma-dif_en_A3A.Labelling.2.txt

@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AmplexorGazetteer extends NemexGazetteer {
+	
+	public static boolean loweCase = false;
 
 	public AmplexorGazetteer(String entriesFile, String gazetteerFName) throws GazetteerCreationException {
 		super(entriesFile, gazetteerFName);
@@ -46,7 +48,8 @@ public class AmplexorGazetteer extends NemexGazetteer {
 			try {
 				while ((line = br.readLine()) != null) {
 					//System.out.println("Current entry: "+ line);
-					String[] entry = line.split("###");
+					String entryLine = (AmplexorGazetteer.loweCase)?line.toLowerCase():line;
+					String[] entry = entryLine.split("###");
 					String entryStr = makeShadowedEntry(entry[0]);
 					String pos = entry[1];
 
