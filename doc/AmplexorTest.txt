@@ -16,3 +16,42 @@ Using ngram=5, lowercased dictionary, SimilarityMeasure.COSINE_SIMILARITY_MEASUR
 18473935 in 5,13164861111 hours
 
 1490 msec pro document
+
+Probleme:
+
+SECTION L1: 1. NAME OF THE MEDICINAL PRODUCT
+
+Renvela 800 mg film-coated tablets
+6256=[-11.933364590908905, tablets, pharmaceutical_form:1:-11.933364590908905]
+[tablets=[27,34]]
+73792=[-11.24021741034896, film-coated tablet, pharmaceutical_form:2:-11.2402174
+1034896]
+[mg film-coated tab=[12,30]]
+107588=[-11.24021741034896, film-coated tablets, pharmaceutical_form:2:-11.24021
+741034896]
+[ mg film-coated tab=[11,30]]
+97368=[-11.933364590908905, uncoated tablets, pharmaceutical_form:1:-11.93336459
+0908905]
+[coated tablets=[20,34]]
+137113=[-10.834752279160398, tablet, presentation_units:1:-11.933364590908905, p
+harmaceutical_form:2:-11.24021741034896]
+[tablet=[27,33]]
+109582=[-11.24021741034896, coated tablet, pharmaceutical_form:2:-11.24021741034
+896]
+[-coated table=[19,32]]
+
+why not found: film-coated tablets or film-coated tablet
+
+-> is ok because is filtered out by MiddleSelector
+-> when NoSelector is used, it works
+
+Better: also return score of each found entry:
+
+- I think I need to add it here:
+	de.dfki.lt.nemex.f.NemexFContainer.getCandidatePairs(Long, int, SimilarityMeasureInterface, double)
+	and somehow add it to the found candidate structure
+	maybe as a two element Pair entityID, Score
+- eventually compute and add score here:
+	de.dfki.lt.nemex.f.NemexFContainer.upgradeFoundCandidates(int, int, Long, Map<Integer, Map<Integer, Long>>)
+	
+- Only possible via Palign or explicit verification ?
