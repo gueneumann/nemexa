@@ -1,5 +1,8 @@
 package de.dfki.lt.nemex.f.verify;
 
+import java.util.Collection;
+import java.util.LinkedList;
+
 import de.dfki.lt.nemex.a.ngram.CharacterNgram;
 import de.dfki.lt.nemex.a.ngram.CharacterNgramWithDuplicate;
 import de.dfki.lt.nemex.f.data.NemexFBean;
@@ -38,10 +41,28 @@ public class Verifier {
 		return ngram;
 	}
 	
+	private Collection<String> intersection(Collection<String> A, Collection<String> B) {
+		Collection<String> rtnList = new LinkedList<>();
+	    for(String dto : A) {
+	        if(B.contains(dto)) {
+	            rtnList.add(dto);
+	        }
+	    }
+	    return rtnList;
+	}
 	
+	/*
+	 * cosinus(r,s) = |intersection(r,s)|/sqroot(|r|*|s)|)
+	 */
+	
+	// TODO - does not work !!!
 	private double cosinusScore(CharacterNgram query, CharacterNgram entity) {
-
-		return 0.0;
+        double score = 
+        		intersection(
+        				query.getNgrams(),entity.getNgrams()).size() / 
+        		Math.sqrt((query.getGramSize() + entity.getGramSize()));
+        System.out.println(query.getNgrams().toString());
+		return score;
 
 	}
 
@@ -98,7 +119,7 @@ public class Verifier {
 		double computedScore = 0.0;
 		
 		if (this.nemexBean.getSimilarityMeasure() == SimilarityMeasure.COSINE_SIMILARITY_MEASURE) {
-			this.cosinusScore(this.queryNgram, this.entityNgram);
+			computedScore = this.cosinusScore(this.queryNgram, this.entityNgram);
 		}
 		else
 			if (this.nemexBean.getSimilarityMeasure() == SimilarityMeasure.DICE_SIMILARITY_MEASURE) {
