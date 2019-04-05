@@ -8,6 +8,15 @@ public class Candidate {
 	private int leftSpan ;
 	private int rightSpan ;
 	private String matchedSurfaceString ;
+	private double score = 0.5;
+	
+	
+	public double getScore() {
+		return score;
+	}
+	public void setScore(double score) {
+		this.score = score;
+	}
 	public long getEntityIndex() {
 		return entityIndex;
 	}
@@ -49,7 +58,7 @@ public class Candidate {
 
 	public String toString(){
 		String printString ="";
-		printString =	this.getMatchedSurfaceString()+"=[" + leftSpan + "," + rightSpan + "]";
+		printString =	this.getMatchedSurfaceString()+"=[" + leftSpan + "," + rightSpan + "]" + ":" + this.score;
 		return printString;
 	}
 }

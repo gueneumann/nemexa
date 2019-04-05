@@ -45,7 +45,7 @@ public class Test_NemexF_Amplexor {
 
 		// set aligner method
 		nemexFBean.setAligner(new de.dfki.lt.nemex.f.aligner.BinaryCountPruneAligner());
-		nemexFBean.setSelector(new de.dfki.lt.nemex.f.selector.NoSelector(nemexFBean));
+		nemexFBean.setSelector(new de.dfki.lt.nemex.f.selector.ScoreSelector(nemexFBean));
 		
 
 		// set dictionary path

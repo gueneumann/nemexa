@@ -51,7 +51,20 @@ Better: also return score of each found entry:
 	de.dfki.lt.nemex.f.NemexFContainer.getCandidatePairs(Long, int, SimilarityMeasureInterface, double)
 	and somehow add it to the found candidate structure
 	maybe as a two element Pair entityID, Score
-- eventually compute and add score here:
-	de.dfki.lt.nemex.f.NemexFContainer.upgradeFoundCandidates(int, int, Long, Map<Integer, Map<Integer, Long>>)
-	
-- Only possible via Palign or explicit verification ?
+
+- I will do it by defining a new class verify which computes the score based on the similarity function
+
+- I will do it like this because, I need different methods for token-based sim function and character-based functions
+
+- I will then call it as part of a specific selector method
+
+- will operate over de.dfki.lt.nemex.f.data.Candidates
+
+- I will add a variable score to a Candidate
+
+- it will be set when creating the candidates using a ScoreSelector which is similarily defined like NoSelector
+
+- the scoring functions will be defined in a Verifier class
+
+
+
