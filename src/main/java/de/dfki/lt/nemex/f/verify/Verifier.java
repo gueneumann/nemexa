@@ -55,13 +55,12 @@ public class Verifier {
 	 * cosinus(r,s) = |intersection(r,s)|/sqroot(|r|*|s)|)
 	 */
 	
-	// TODO - does not work !!!
+	// TODO - does not work !!! rtnList is empty 
 	private double cosinusScore(CharacterNgram query, CharacterNgram entity) {
-        double score = 
-        		intersection(
-        				query.getNgrams(),entity.getNgrams()).size() / 
+		Collection<String> rtnList = intersection(query.getNgrams(),entity.getNgrams());
+        double score = rtnList.size() / 
         		Math.sqrt((query.getGramSize() + entity.getGramSize()));
-        System.out.println(query.getNgrams().toString());
+        System.out.println(rtnList.toString());
 		return score;
 
 	}
