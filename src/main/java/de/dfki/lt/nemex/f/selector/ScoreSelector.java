@@ -34,9 +34,7 @@ public class ScoreSelector extends AbstractSelector {
 		this.setNemexFBean(nemexFbean);
 	}
 
-	// factorize out all macthing substrings with correct span
-	// TODO THIS IS probably inefficient and can be made easier !!, I will do it when I have a bit more time.
-
+	// Compute score to each candidate and eventually filter out
 	@Override
 	public List<Candidate> BucketCandidates (long entityId, Map<Integer, Map<Integer, Long>> foundCandidates){
 		List<Candidate> candidatesForEntityId = new ArrayList<Candidate>();
@@ -46,9 +44,11 @@ public class ScoreSelector extends AbstractSelector {
 		
 		Verifier verifier = new Verifier(this.getNemexFBean());
 		
-		// TODO: assumming we only have one single entry
+		String entityString = NemexFIndex.getEntry(this.getNemexFBean().getGazetteerFilePath(), entityId).get(1);
 		
-		verifier.setEntity(NemexFIndex.getEntry(this.getNemexFBean().getGazetteerFilePath(), entityId).get(0));
+		System.out.println("Entity id: " +entityString);
+		
+		verifier.setEntity(entityString);
 
 		for (int leftBucketSpan=0; leftBucketSpan < sortedStartPositionList.size(); leftBucketSpan++){
 			int rightBucketSpan = leftBucketSpan;

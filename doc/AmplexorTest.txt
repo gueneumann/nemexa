@@ -68,3 +68,43 @@ Better: also return score of each found entry:
 
 
 
+It seems to work for cosinus:
+
+binary aligner:
+
+Renvela 800 mg film-coated tablets
+
+6256=[-11.933364590908905, tablets, pharmaceutical_form:1:-11.933364590908905]
+[tablets=[27,34]:1.0]
+73792=[-11.24021741034896, film-coated tablet, pharmaceutical_form:2:-11.24021741034896]
+[ 800 mg film-coated =[7,27]:0.5345224838248488, 800 mg film-coated t=[8,28]:0.6013377943029549, 00 mg film-coated ta=[9,29]:0.6681531047810609, 0 mg film-coated tab=[10,30]:0.7349684152591671,  mg film-coated tabl=[11,31]:0.8017837257372732, mg film-coated tablet=[12,33]:0.9074852129730302, g film-coated tablets=[13,34]:0.9074852129730302,  film-coated tablets=[14,34]:0.9354143466934853, film-coated tablets=[15,34]:0.9660917830792959, ilm-coated tablets=[16,34]:0.9285714285714286, lm-coated tablets=[17,34]:0.8894991799933214, m-coated tablets=[18,34]:0.8486684247915055]
+107588=[-11.24021741034896, film-coated tablets, pharmaceutical_form:2:-11.24021741034896]
+[la 800 mg film-coate=[5,25]:0.3872983346207417, a 800 mg film-coated =[6,27]:0.5009794328681196,  800 mg film-coated t=[7,28]:0.5636018619766345, 800 mg film-coated ta=[8,29]:0.6262242910851495, 00 mg film-coated tab=[9,30]:0.6888467201936644, 0 mg film-coated tabl=[10,31]:0.7514691493021795,  mg film-coated table=[11,32]:0.8140915784106943, mg film-coated tablets=[12,34]:0.9128709291752769, g film-coated tablets=[13,34]:0.9393364366277243,  film-coated tablets=[14,34]:0.9682458365518541, film-coated tablets=[15,34]:1.0, ilm-coated tablets=[16,34]:0.9660917830792959, lm-coated tablets=[17,34]:0.9309493362512627]
+97368=[-11.933364590908905, uncoated tablets, pharmaceutical_form:1:-11.933364590908905]
+[coated tablets=[20,34]:0.9128709291752769]
+137113=[-10.834752279160398, tablet, presentation_units:1:-11.933364590908905, pharmaceutical_form:2:-11.24021741034896]
+[tablet=[27,33]:1.0]
+109582=[-11.24021741034896, coated tablet, pharmaceutical_form:2:-11.24021741034896]
+[ilm-coated ta=[16,29]:0.5555555555555556, lm-coated tab=[17,30]:0.6666666666666666, m-coated tablet=[18,33]:0.9045340337332909, -coated tablets=[19,34]:0.9045340337332909, coated tablets=[20,34]:0.9486832980505138, oated tablets=[21,34]:0.8888888888888888, ated tablets=[22,34]:0.8249579113843055]
+
+
+BUT, candidates should only be above threshold which is .09 in this example run !!!
+
+Bucket aligner seems to be correct !
+
+
+6256=[-11.933364590908905, tablets, pharmaceutical_form:1:-11.933364590908905]
+[tablets=[27,34]:1.0]
+73792=[-11.24021741034896, film-coated tablet, pharmaceutical_form:2:-11.24021741034896]
+[mg film-coated tablet=[12,33]:0.9074852129730302, g film-coated tablets=[13,34]:0.9074852129730302,  film-coated tablets=[14,34]:0.9354143466934853, film-coated tablets=[15,34]:0.9660917830792959, ilm-coated tablets=[16,34]:0.9285714285714286, lm-coated tablet=[17,33]:0.9258200997725514]
+107588=[-11.24021741034896, film-coated tablets, pharmaceutical_form:2:-11.24021741034896]
+[mg film-coated tablets=[12,34]:0.9128709291752769, g film-coated tablets=[13,34]:0.9393364366277243,  film-coated tablets=[14,34]:0.9682458365518541, film-coated tablets=[15,34]:1.0, ilm-coated tablets=[16,34]:0.9660917830792959, lm-coated tablets=[17,34]:0.9309493362512627]
+97368=[-11.933364590908905, uncoated tablets, pharmaceutical_form:1:-11.933364590908905]
+[coated tablets=[20,34]:0.9128709291752769]
+137113=[-10.834752279160398, tablet, presentation_units:1:-11.933364590908905, pharmaceutical_form:2:-11.24021741034896]
+[tablet=[27,33]:1.0]
+109582=[-11.24021741034896, coated tablet, pharmaceutical_form:2:-11.24021741034896]
+[m-coated tablet=[18,33]:0.9045340337332909, -coated tablets=[19,34]:0.9045340337332909, coated tablets=[20,34]:0.9486832980505138, oated tablet=[21,33]:0.9428090415820635]
+
+
+

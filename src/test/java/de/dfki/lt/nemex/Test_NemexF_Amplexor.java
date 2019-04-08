@@ -40,11 +40,11 @@ public class Test_NemexF_Amplexor {
 
 		nemexFBean.setnGramSize(5);
 		nemexFBean.setSimilarityMeasure(SimilarityMeasure.COSINE_SIMILARITY_MEASURE);
-		nemexFBean.setSimilarityThreshold(0.9);
+		nemexFBean.setSimilarityThreshold(0.8);
 		// END of parameter setting
 
 		// set aligner method
-		nemexFBean.setAligner(new de.dfki.lt.nemex.f.aligner.BinaryCountPruneAligner());
+		nemexFBean.setAligner(new de.dfki.lt.nemex.f.aligner.BucketCountPruneAligner());
 		nemexFBean.setSelector(new de.dfki.lt.nemex.f.selector.ScoreSelector(nemexFBean));
 		
 

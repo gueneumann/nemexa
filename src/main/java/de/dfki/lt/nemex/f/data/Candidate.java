@@ -8,6 +8,9 @@ public class Candidate {
 	private int leftSpan ;
 	private int rightSpan ;
 	private String matchedSurfaceString ;
+	
+	// GN 
+	// I added this variable in ordre to store the real similarity score for the pair (entityIndex, matchedSurfaceString)
 	private double score = 0.5;
 	
 	
