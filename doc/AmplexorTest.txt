@@ -89,9 +89,12 @@ Renvela 800 mg film-coated tablets
 
 
 BUT, candidates should only be above threshold which is .09 in this example run !!!
+NOTE: found entities look the same as for bucket, but substrings are partially wrong because of lower allowed threshold
+Eventually, I extract candidate spans not correct ?
 
 Bucket aligner seems to be correct !
 
+Renvela 800 mg film-coated tablets
 
 6256=[-11.933364590908905, tablets, pharmaceutical_form:1:-11.933364590908905]
 [tablets=[27,34]:1.0]
@@ -105,6 +108,14 @@ Bucket aligner seems to be correct !
 [tablet=[27,33]:1.0]
 109582=[-11.24021741034896, coated tablet, pharmaceutical_form:2:-11.24021741034896]
 [m-coated tablet=[18,33]:0.9045340337332909, -coated tablets=[19,34]:0.9045340337332909, coated tablets=[20,34]:0.9486832980505138, oated tablet=[21,33]:0.9428090415820635]
+
+NEXT:
+
+first implement other verifiers to complete the code
+eventually get N-best matches
+
+
+
 
 
 
