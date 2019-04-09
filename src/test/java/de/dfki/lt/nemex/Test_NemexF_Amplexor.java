@@ -36,24 +36,23 @@ public class Test_NemexF_Amplexor {
 
 		NemexFBean nemexFBean = new NemexFBean();
 
+		// set dictionary path
+		nemexFBean.setGazetteerFilePath(
+				"/local/data/AmplexorData/CSD_Data_Delivery_v1/Controlled_Vocabulary/entriesType-nemex.txt");
+
 		// BEGIN - Setting parameters
 
 		nemexFBean.setnGramSize(5);
-		nemexFBean.setSimilarityMeasure(SimilarityMeasure.COSINE_SIMILARITY_MEASURE);
-		nemexFBean.setSimilarityThreshold(0.8);
+		nemexFBean.setSimilarityMeasure(SimilarityMeasure.ED_SIMILARITY_MEASURE);
+		nemexFBean.setSimilarityThreshold(1.0);
 		// END of parameter setting
 
 		// set aligner method
 		nemexFBean.setAligner(new de.dfki.lt.nemex.f.aligner.BucketCountPruneAligner());
 		nemexFBean.setSelector(new de.dfki.lt.nemex.f.selector.ScoreSelector(nemexFBean));
-		
-
-		// set dictionary path
-		nemexFBean.setGazetteerFilePath(
-				"/local/data/AmplexorData/CSD_Data_Delivery_v1/Controlled_Vocabulary/entriesType-nemex.txt");
 
 		System.out.println(nemexFBean.toString());
-		
+
 		// initialize controller
 		System.out.println("Loading dictionary ...");
 		time1 = System.currentTimeMillis();
@@ -61,10 +60,8 @@ public class Test_NemexF_Amplexor {
 		time2 = System.currentTimeMillis();
 		System.out.println("System time (msec): " + (time2 - time1));
 
-		
 		// set query string
-		nemexFBean.setQueryString(
-				"Renvela 800 mg film-coated tablets");
+		nemexFBean.setQueryString("Renvela 800 mg film-coated tablets");
 
 		// create ngram heap of input string
 		controller.setCharacterNgramFromQueryString(nemexFBean.getQueryString());
@@ -75,7 +72,7 @@ public class Test_NemexF_Amplexor {
 		controller.process();
 		controller.selectCandidates();
 		time2 = System.currentTimeMillis();
-		System.out.println(nemexFBean.getQueryString()+"\n");
+		System.out.println(nemexFBean.getQueryString() + "\n");
 		controller.printSelectedCandidates();
 		System.out.println("System time (msec): " + (time2 - time1));
 	}

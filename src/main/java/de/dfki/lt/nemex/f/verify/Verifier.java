@@ -1,7 +1,10 @@
 package de.dfki.lt.nemex.f.verify;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Set;
 
 import de.dfki.lt.nemex.a.ngram.CharacterNgram;
 import de.dfki.lt.nemex.a.ngram.CharacterNgramWithDuplicate;
@@ -41,51 +44,78 @@ public class Verifier {
 		return ngram;
 	}
 	
+	// TODO:
+	// This is eventually not the best way to do it ?
 	private Collection<String> intersection(Collection<String> A, Collection<String> B) {
 		Collection<String> rtnList = new LinkedList<>();
-	    for(String dto : A) {
-	        if(B.contains(dto)) {
-	            rtnList.add(dto);
-	        }
-	    }
-	    return rtnList;
+
+		if (A.size() <= B.size())
+			for (String dto : A) {
+				if (B.contains(dto)) {
+					rtnList.add(dto);
+				}
+			}
+		else
+			for (String dto : B) {
+				if (A.contains(dto)) {
+					rtnList.add(dto);
+				}
+			}
+		return rtnList;
 	}
 	
-	/*
-	 * cosinus(r,s) = |intersection(r,s)|/sqroot(|r|*|s)|)
-	 */
+	private Collection<String> union(Collection<String> A, Collection<String> B) {
+        Set<String> set = new HashSet<String>();
+
+        set.addAll(A);
+        set.addAll(B);
+
+        return (Collection<String>)(set);
+    }
 	
-	// TODO - does not work !!! rtnList is empty 
+	/*
+	 * cosinus(r,s) = |intersection(r,s)|/sqroot(|r|*|s|))
+	 */
 	private double cosinusScore(CharacterNgram query, CharacterNgram entity) {
+		Collection<String> rtnList = intersection(query.getNgrams(), entity.getNgrams());
+		double score = rtnList.size() / Math.sqrt((query.getNgrams().size() * entity.getNgrams().size()));
+
+		return score;
+	}
+
+	/*
+	 * dice(r,s) = 2*|intersection(r,s)|/(|r|*|s|)
+	 */
+	private double diceScore(CharacterNgram query, CharacterNgram entity) {
 		Collection<String> rtnList = intersection(query.getNgrams(),entity.getNgrams());
-        double score = rtnList.size() / 
-        		Math.sqrt((query.getGramSize() + entity.getGramSize()));
-        System.out.println(rtnList.toString());
+        double score = (2.0 * rtnList.size()) / (query.getNgrams().size() + entity.getNgrams().size());
+//        System.out.println("Query:     " + query.getNgrams() + " ... " + query.getNgrams().size());
+//        System.out.println("Entity:    " + entity.getNgrams() + " ... " + entity.getNgrams().size());
+//        System.out.println("Intersect: " + rtnList + " ... " + rtnList.size());
+        
+		return score;
+	}
+
+	private double jaccardScore(CharacterNgram query, CharacterNgram entity) {
+		Collection<String> rtnList1 = intersection(query.getNgrams(),entity.getNgrams());
+		Collection<String> rtnList2 = union(query.getNgrams(),entity.getNgrams());
+        double score = ((1.0 * rtnList1.size()) / rtnList2.size());
 		return score;
 
 	}
 
-	private double diceScore(CharacterNgram query, CharacterNgram entity) {
-
-		return 0.0;
-
-	}
-
-	private double jaccardScore(CharacterNgram query, CharacterNgram entity) {
-
-		return 0.0;
-
-	}
-
 	private double edScore(String query, String entity) {
+		Palign palign = new Palign(1,1,1);
+		palign.dp(query, entity);
 
-		return 0.0;
+		return (1.0 * palign.getDistance());
 
 	}
 
 	private double edsScore(String query, String entity) {
-
-		return 0.0;
+		Palign palign = new Palign(1,1,1);
+		palign.dp(query, entity);
+		return palign.computeEditSimilarity();
 
 	}
 	
@@ -122,23 +152,22 @@ public class Verifier {
 		}
 		else
 			if (this.nemexBean.getSimilarityMeasure() == SimilarityMeasure.DICE_SIMILARITY_MEASURE) {
-				this.diceScore(this.queryNgram, this.entityNgram);
+				computedScore = this.diceScore(this.queryNgram, this.entityNgram);
 			}
 			else
 				if (this.nemexBean.getSimilarityMeasure() == SimilarityMeasure.JACCARD_SIMILARITY_MEASURE) {
-					this.jaccardScore(this.queryNgram, this.entityNgram);
+					computedScore = this.jaccardScore(this.queryNgram, this.entityNgram);
 				}
 				else
 					if (this.nemexBean.getSimilarityMeasure() == SimilarityMeasure.ED_SIMILARITY_MEASURE) {
-						this.edScore(this.queryString, this.entityString);
+						computedScore = this.edScore(this.queryString, this.entityString);
 					}
 					else
 						if (this.nemexBean.getSimilarityMeasure() == SimilarityMeasure.EDS_SIMILARITY_MEASURE) {
-							this.edsScore(this.queryString, this.entityString);
+							computedScore = this.edsScore(this.queryString, this.entityString);
 						}
 						else
 							System.exit(0);
-			
 		
 		return computedScore;
 	}

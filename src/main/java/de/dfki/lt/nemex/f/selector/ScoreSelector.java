@@ -46,7 +46,7 @@ public class ScoreSelector extends AbstractSelector {
 		
 		String entityString = NemexFIndex.getEntry(this.getNemexFBean().getGazetteerFilePath(), entityId).get(1);
 		
-		System.out.println("Entity id: " +entityString);
+		//System.out.println("Entity id: " +entityString);
 		
 		verifier.setEntity(entityString);
 

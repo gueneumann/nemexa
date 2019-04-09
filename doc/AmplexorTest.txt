@@ -94,7 +94,6 @@ Eventually, I extract candidate spans not correct ?
 
 Bucket aligner seems to be correct !
 
-Renvela 800 mg film-coated tablets
 
 6256=[-11.933364590908905, tablets, pharmaceutical_form:1:-11.933364590908905]
 [tablets=[27,34]:1.0]
@@ -111,7 +110,82 @@ Renvela 800 mg film-coated tablets
 
 NEXT:
 
-first implement other verifiers to complete the code
+first implement other verifiers to complete the code BY USING bucketaligner first, and then later correct
+
+DICE
+
+6256=[-11.933364590908905, tablets, pharmaceutical_form:1:-11.933364590908905]
+[tablets=[27,34]:1.0]
+73792=[-11.24021741034896, film-coated tablet, pharmaceutical_form:2:-11.24021741034896]
+[mg film-coated tablet=[12,33]:0.9032258064516129, g film-coated tablets=[13,34]:0.9032258064516129,  film-coated tablets=[14,34]:0.9333333333333333, film-coated tablets=[15,34]:0.9655172413793104, ilm-coated tablets=[16,34]:0.9285714285714286, lm-coated tablet=[17,33]:0.9230769230769231]
+107588=[-11.24021741034896, film-coated tablets, pharmaceutical_form:2:-11.24021741034896]
+[mg film-coated tablets=[12,34]:0.9090909090909091, g film-coated tablets=[13,34]:0.9375,  film-coated tablets=[14,34]:0.967741935483871, film-coated tablets=[15,34]:1.0, ilm-coated tablets=[16,34]:0.9655172413793104, lm-coated tablets=[17,34]:0.9285714285714286]
+97368=[-11.933364590908905, uncoated tablets, pharmaceutical_form:1:-11.933364590908905]
+[coated tablets=[20,34]:0.9090909090909091]
+137113=[-10.834752279160398, tablet, presentation_units:1:-11.933364590908905, pharmaceutical_form:2:-11.24021741034896]
+[tablet=[27,33]:1.0]
+109582=[-11.24021741034896, coated tablet, pharmaceutical_form:2:-11.24021741034896]
+[m-coated tablet=[18,33]:0.9, -coated tablets=[19,34]:0.9, coated tablets=[20,34]:0.9473684210526315, oated tablet=[21,33]:0.9411764705882353]
+
+
+JACCARD
+
+6256=[-11.933364590908905, tablets, pharmaceutical_form:1:-11.933364590908905]
+[tablets=[27,34]:1.0]
+73792=[-11.24021741034896, film-coated tablet, pharmaceutical_form:2:-11.24021741034896]
+[ film-coated tablet=[14,33]:0.9333333333333333, film-coated tablets=[15,34]:0.9333333333333333, ilm-coated tablet=[16,33]:0.9285714285714286]
+107588=[-11.24021741034896, film-coated tablets, pharmaceutical_form:2:-11.24021741034896]
+[ film-coated tablets=[14,34]:0.9375, film-coated tablets=[15,34]:1.0, ilm-coated tablets=[16,34]:0.9333333333333333]
+137113=[-10.834752279160398, tablet, presentation_units:1:-11.933364590908905, pharmaceutical_form:2:-11.24021741034896]
+[tablet=[27,33]:1.0]
+109582=[-11.24021741034896, coated tablet, pharmaceutical_form:2:-11.24021741034896]
+[-coated tablet=[19,33]:0.9, coated tablets=[20,34]:0.9]
+
+ED 
+
+-> ERROR: DOES NOT FILTER OUT CANDIDATES CORRECTLY
+
+79073=[-11.933364590908905, coated tongue, condition:1:-11.933364590908905]
+[film-coated t=[15,28]:10.0, ilm-coated ta=[16,29]:9.0, lm-coated tab=[17,30]:8.0, m-coated tabl=[18,31]:7.0, -coated table=[19,32]:5.0, coated tablet=[20,33]:5.0]
+73792=[-11.24021741034896, film-coated tablet, pharmaceutical_form:2:-11.24021741034896]
+[0 mg film-coated ta=[10,29]:9.0,  mg film-coated tab=[11,30]:7.0, mg film-coated tabl=[12,31]:5.0, g film-coated table=[13,32]:3.0,  film-coated tablet=[14,33]:1.0, film-coated tablets=[15,34]:1.0, ilm-coated tablets=[16,34]:2.0, lm-coated tablets=[17,34]:3.0]
+89120=[-11.933364590908905, tablet, film-coated, pharmaceutical_form:1:-11.933364590908905]
+[ film-coated tablet=[14,33]:14.0]
+65122=[-11.933364590908905, sugar-coated tablet, pharmaceutical_form:1:-11.933364590908905]
+[ film-coated tablet=[14,33]:5.0, film-coated tablets=[15,34]:6.0, ilm-coated tablets=[16,34]:6.0]
+107588=[-11.24021741034896, film-coated tablets, pharmaceutical_form:2:-11.24021741034896]
+[0 mg film-coated tab=[10,30]:9.0,  mg film-coated tabl=[11,31]:7.0, mg film-coated table=[12,32]:5.0, g film-coated tablet=[13,33]:3.0,  film-coated tablets=[14,34]:1.0, film-coated tablets=[15,34]:0.0, ilm-coated tablets=[16,34]:1.0]
+45190=[-11.933364590908905, film coated tablets, pharmaceutical_form:1:-11.933364590908905]
+[film-coated tablets=[15,34]:1.0, ilm-coated tablets=[16,34]:2.0]
+84489=[-11.933364590908905, elevated k, condition:1:-11.933364590908905]
+[lm-coated =[17,27]:6.0, m-coated t=[18,28]:5.0, -coated ta=[19,29]:6.0, coated tab=[20,30]:7.0, oated tabl=[21,31]:8.0, ated table=[22,32]:8.0]
+50635=[-11.933364590908905, injectable, pharmaceutical_form:1:-11.933364590908905]
+[ated table=[22,32]:5.0, ted tablet=[23,33]:6.0, ed tablets=[24,34]:7.0, d tablets=[25,34]:7.0]
+45420=[-11.933364590908905, retard tablets, pharmaceutical_form:1:-11.933364590908905]
+[coated tablets=[20,34]:5.0, oated tablets=[21,34]:4.0]
+109582=[-11.24021741034896, coated tablet, pharmaceutical_form:2:-11.24021741034896]
+[film-coated ta=[15,29]:9.0, ilm-coated tab=[16,30]:7.0, lm-coated tabl=[17,31]:5.0, m-coated table=[18,32]:3.0, -coated tablet=[19,33]:1.0, coated tablets=[20,34]:1.0, oated tablets=[21,34]:2.0, ated tablets=[22,34]:3.0]
+6256=[-11.933364590908905, tablets, pharmaceutical_form:1:-11.933364590908905]
+[ed table=[24,32]:5.0, d tablet=[25,33]:3.0,  tablets=[26,34]:1.0, tablets=[27,34]:0.0, ablets=[28,34]:1.0]
+88593=[-11.933364590908905, excitable, condition:1:-11.933364590908905]
+[ated table=[22,32]:5.0, ted tablet=[23,33]:5.0, ed tablets=[24,34]:5.0, d tablets=[25,34]:6.0,  tablets=[26,34]:6.0]
+91283=[-11.933364590908905, irritable, condition:1:-11.933364590908905]
+[ated table=[22,32]:5.0, ted tablet=[23,33]:5.0, ed tablets=[24,34]:6.0, d tablets=[25,34]:6.0,  tablets=[26,34]:6.0]
+124210=[-11.933364590908905, sugar-coated tablets, pharmaceutical_form:1:-11.933364590908905]
+[ film-coated tablets=[14,34]:5.0, film-coated tablets=[15,34]:5.0]
+20374=[-11.933364590908905, tabletten, pharmaceutical_form:1:-11.933364590908905]
+[ated table=[22,32]:9.0, ted tablet=[23,33]:7.0, ed tablets=[24,34]:6.0, d tablets=[25,34]:5.0,  tablets=[26,34]:4.0]
+97368=[-11.933364590908905, uncoated tablets, pharmaceutical_form:1:-11.933364590908905]
+[film-coated table=[15,32]:7.0, ilm-coated tablet=[16,33]:5.0, lm-coated tablets=[17,34]:3.0, m-coated tablets=[18,34]:2.0, -coated tablets=[19,34]:2.0]
+137113=[-10.834752279160398, tablet, presentation_units:1:-11.933364590908905, pharmaceutical_form:2:-11.24021741034896]
+[d table=[25,32]:3.0,  tablet=[26,33]:1.0, tablets=[27,34]:1.0, ablets=[28,34]:2.0]
+2589=[-11.933364590908905, film coated tablet, pharmaceutical_form:1:-11.933364590908905]
+[film-coated tablet=[15,33]:1.0, ilm-coated tablets=[16,34]:3.0, lm-coated tablets=[17,34]:4.0]
+7263=[-11.933364590908905, film- coated tablets, pharmaceutical_form:1:-11.933364590908905]
+[ film-coated tablets=[14,34]:2.0, film-coated tablets=[15,34]:1.0]
+
+
+NEXT
 eventually get N-best matches
 
 
