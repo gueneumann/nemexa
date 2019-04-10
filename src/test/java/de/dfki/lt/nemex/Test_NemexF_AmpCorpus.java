@@ -59,7 +59,7 @@ public class Test_NemexF_AmpCorpus {
 
 		// set aligner method
 		nemexFBean.setAligner(new de.dfki.lt.nemex.f.aligner.BinaryCountPruneAligner());
-		nemexFBean.setSelector(new de.dfki.lt.nemex.f.selector.MiddleSelector(nemexFBean));
+		nemexFBean.setSelector(new de.dfki.lt.nemex.f.selector.ScoreSelector(nemexFBean));
 
 		// set dictionary path
 		nemexFBean.setGazetteerFilePath(dictionary);
