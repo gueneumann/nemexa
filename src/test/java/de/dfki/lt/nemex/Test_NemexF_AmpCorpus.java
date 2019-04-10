@@ -155,9 +155,10 @@ public class Test_NemexF_AmpCorpus {
 	public static void main(String[] args) throws IOException {
 
 		Test_NemexF_AmpCorpus testRun = new Test_NemexF_AmpCorpus();
-		testRun.initNemex(5, SimilarityMeasure.COSINE_SIMILARITY_MEASURE, 0.9);
+		testRun.initNemex(5, SimilarityMeasure.ED_SIMILARITY_MEASURE, 2.0);
 		
-		testRun.processAmpCorpusDir(testRun.inDir, testRun.outFile);
+		testRun.processAmpCorpusDir(testRun.inDir, 
+				"/local/data/AmplexorData/EMA_EPAR_nemexMatches_ED_2.txt");
 
 	}
 

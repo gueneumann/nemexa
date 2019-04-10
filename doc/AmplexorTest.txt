@@ -17,6 +17,12 @@ Using ngram=5, lowercased dictionary, SimilarityMeasure.COSINE_SIMILARITY_MEASUR
 
 1490 msec pro document
 
+Rerun with new verifier scorer:
+
+18599603 in 5,16655638889 hours
+
+1500 msec pro documents
+
 Probleme:
 
 SECTION L1: 1. NAME OF THE MEDICINAL PRODUCT
