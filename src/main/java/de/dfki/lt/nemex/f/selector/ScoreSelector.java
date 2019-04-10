@@ -80,8 +80,11 @@ public class ScoreSelector extends AbstractSelector {
 			Candidate maxCandidate = new Candidate(leftSpan, rightSpan, matchedSurfaceString, entityId);
 			
 			verifier.setQuery(matchedSurfaceString);
-			maxCandidate.setScore(verifier.score());
-			candidatesForEntityId.add(maxCandidate);
+			double score = verifier.score();
+			if (verifier.verifyScore(score)) {
+				maxCandidate.setScore(verifier.score());
+				candidatesForEntityId.add(maxCandidate);
+			}
 
 			// Jump to next bucket
 			leftBucketSpan=rightBucketSpan;

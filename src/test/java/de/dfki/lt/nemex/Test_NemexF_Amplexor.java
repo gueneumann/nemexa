@@ -43,12 +43,12 @@ public class Test_NemexF_Amplexor {
 		// BEGIN - Setting parameters
 
 		nemexFBean.setnGramSize(5);
-		nemexFBean.setSimilarityMeasure(SimilarityMeasure.ED_SIMILARITY_MEASURE);
-		nemexFBean.setSimilarityThreshold(1.0);
+		nemexFBean.setSimilarityMeasure(SimilarityMeasure.JACCARD_SIMILARITY_MEASURE);
+		nemexFBean.setSimilarityThreshold(0.9);
 		// END of parameter setting
 
 		// set aligner method
-		nemexFBean.setAligner(new de.dfki.lt.nemex.f.aligner.BucketCountPruneAligner());
+		nemexFBean.setAligner(new de.dfki.lt.nemex.f.aligner.BinaryCountPruneAligner());
 		nemexFBean.setSelector(new de.dfki.lt.nemex.f.selector.ScoreSelector(nemexFBean));
 
 		System.out.println(nemexFBean.toString());
@@ -76,5 +76,4 @@ public class Test_NemexF_Amplexor {
 		controller.printSelectedCandidates();
 		System.out.println("System time (msec): " + (time2 - time1));
 	}
-
 }

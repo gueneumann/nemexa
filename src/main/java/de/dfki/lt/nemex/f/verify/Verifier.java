@@ -143,6 +143,27 @@ public class Verifier {
 			queryString = query;
 	}
 	
+	/*
+	 * TODO
+	 * This is to filter out candidates whose computed threshold is actually lower/larger than the given one
+	 * Currently, this happens mainly for ED and EDS.
+	 * The reason might be that for these 
+	 * de.dfki.lt.nemex.f.similarity.EditDistanceMeasure.tighterUpperWindowSize(int, int, double)
+	 * are NOT yet defined ! -> I have to check this !!!
+	 */
+	public boolean verifyScore(double computedScore) {
+		boolean verified = false;
+		if (this.nemexBean.getSimilarityMeasure() == SimilarityMeasure.COSINE_SIMILARITY_MEASURE
+				|| this.nemexBean.getSimilarityMeasure() == SimilarityMeasure.DICE_SIMILARITY_MEASURE
+				|| this.nemexBean.getSimilarityMeasure() == SimilarityMeasure.JACCARD_SIMILARITY_MEASURE
+				|| this.nemexBean.getSimilarityMeasure() == SimilarityMeasure.EDS_SIMILARITY_MEASURE) {
+			verified = (computedScore >= this.nemexBean.getSimilarityThreshold()) ? true : false;
+		} else if (this.nemexBean.getSimilarityMeasure() == SimilarityMeasure.ED_SIMILARITY_MEASURE) {
+			verified = (computedScore <= this.nemexBean.getSimilarityThreshold()) ? true : false;
+		} else
+			System.err.println("No threshold for " + this.nemexBean.getSimilarityMeasure());
+		return verified;
+	}
 	
 	public double score() {
 		double computedScore = 0.0;

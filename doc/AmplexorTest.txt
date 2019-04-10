@@ -185,7 +185,20 @@ ED
 [ film-coated tablets=[14,34]:2.0, film-coated tablets=[15,34]:1.0]
 
 
+I SOLVED THE ABOVE PROBLEMS BY ADDING A VERIFICATION STEP, where it is checked whether the computed score is actually 
+consistent with the specified similarity threshold
+
+-> this could also be the place where to add the N-best criteria
+
+By the way: this also helps in correcting the binary aligner
+
 NEXT
+
+check why ED and EDS return candidates which are lower then the given sim threshold
+
+same for binary aligner
+
+THEN
 eventually get N-best matches
 
 
