@@ -11,7 +11,7 @@ Next:
 
 Write out found matches
 
-Using ngram=5, lowercased dictionary, SimilarityMeasure.COSINE_SIMILARITY_MEASURE, 0.9
+Using ngram=5, lowercased dictionary, SimilarityMeasure.COSINE_SIMILARITY_MEASURE, 0.9, binary
 
 18473935 in 5,13164861111 hours
 
@@ -22,6 +22,18 @@ Rerun with new verifier scorer:
 18599603 in 5,16655638889 hours
 
 1500 msec pro documents
+
+Using ngram=5, lowercased dictionary, SimilarityMeasure.ED_SIMILARITY_MEASURE, 2, binary
+
+35494057 in 9,85946027778
+
+2863 msec pro document
+
+Using ngram=5, lowercased dictionary, SimilarityMeasure.ED_SIMILARITY_MEASURE, 2, bucket
+
+34634707 in 9,62075194444 -> near as binary
+
+Using ngram=4, lowercased dictionary, SimilarityMeasure.JACCARD_SIMILARITY_MEASURE, 0.8, bucket
 
 Probleme:
 
@@ -203,6 +215,10 @@ NEXT
 check why ED and EDS return candidates which are lower then the given sim threshold
 
 same for binary aligner
+
+for "The recommended starting dose of sevelamer carbonate is" 
+-> no match of entry "sevelamer carbonate" -> unlcear why !
+-> for all sim fcts
 
 THEN
 eventually get N-best matches

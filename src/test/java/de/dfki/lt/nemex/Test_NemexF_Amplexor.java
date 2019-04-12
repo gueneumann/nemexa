@@ -48,7 +48,7 @@ public class Test_NemexF_Amplexor {
 		// END of parameter setting
 
 		// set aligner method
-		nemexFBean.setAligner(new de.dfki.lt.nemex.f.aligner.BinaryCountPruneAligner());
+		nemexFBean.setAligner(new de.dfki.lt.nemex.f.aligner.BucketCountPruneAligner());
 		nemexFBean.setSelector(new de.dfki.lt.nemex.f.selector.ScoreSelector(nemexFBean));
 
 		System.out.println(nemexFBean.toString());
@@ -61,7 +61,7 @@ public class Test_NemexF_Amplexor {
 		System.out.println("System time (msec): " + (time2 - time1));
 
 		// set query string
-		nemexFBean.setQueryString("Renvela 800 mg film-coated tablets");
+		nemexFBean.setQueryString("The recommended starting dose of sevelamer carbonate is");
 
 		// create ngram heap of input string
 		controller.setCharacterNgramFromQueryString(nemexFBean.getQueryString());
