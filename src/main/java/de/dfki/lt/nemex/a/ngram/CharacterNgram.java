@@ -1,5 +1,8 @@
 package de.dfki.lt.nemex.a.ngram;
 
+import java.util.Collection;
+import java.util.List;
+
 /*
  *  The Abstract class for character-based n-gram representation of Strings
  *  NEMEX
@@ -23,6 +26,7 @@ public abstract class CharacterNgram {
 	 */
 	private String str;
 	private int gramSize;
+	private Collection<String> ngrams;
 
 	/*
 	 * Methods
@@ -50,6 +54,10 @@ public abstract class CharacterNgram {
 
 	public int getGramSize() {
 		return gramSize;
+	}
+	
+	public Collection<String> getNgrams() {
+		return ngrams;
 	}
 
 	public void setGramSize(int gramSize) {

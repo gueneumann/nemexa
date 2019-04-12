@@ -376,12 +376,15 @@ Thus, I need to parameterize NemexF in this respect when
 
 Thus, when I change the similarity function I need to recompute the inverted index of the dictionary.
 
-And then it might be the case that I need a final verify check at least for ED and EDS using Palign
+And then it might be the case that I need a final verify check at least for ED and EDS using Palign because of CPmerge for token level
 
-Thus, what I have sp far is basically a version were I use for ALL similarity function N-GRAMs
+Thus, what I have so far is basically a version were I use for ALL similarity function N-GRAMs
 
-I THIN WHAT I HAVE DONE IS TO AUGMENT CPmerge (NemexA) to FAERIE or better to document level.
+Possible changes in code:
+- de.dfki.lt.nemex.f.data.InvertedList_FAERIE_tokenBased.InvertedList_FAERIE_tokenBased(Gazetteer, int, boolean)
+	make sure to use # if used for splitting MLW entries
 
-NOTE: I have c++ simstring code under work/simstring
+
+
 
 

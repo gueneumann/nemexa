@@ -1,6 +1,7 @@
 package de.dfki.lt.nemex;
 
 import de.dfki.lt.nemex.f.NemexFController;
+import de.dfki.lt.nemex.f.aligner.AlignerInterface;
 import de.dfki.lt.nemex.f.data.NemexFBean;
 import de.dfki.lt.nemex.f.similarity.SimilarityMeasure;
 
@@ -47,7 +48,7 @@ public class Test_NemexF_AmpCorpus {
 	
 	public String outFile = "/local/data/AmplexorData/EMA_EPAR_nemexMatches.txt";
 
-	public void initNemex(int ngramSize, String simFunction, double similarityThreshold) {
+	public void initNemex(int ngramSize, String simFunction, double similarityThreshold, AlignerInterface aligner) {
 		long time1;
 		long time2;
 		// BEGIN - Setting parameters
@@ -58,8 +59,8 @@ public class Test_NemexF_AmpCorpus {
 		// END of parameter setting
 
 		// set aligner method
-		nemexFBean.setAligner(new de.dfki.lt.nemex.f.aligner.BinaryCountPruneAligner());
-		nemexFBean.setSelector(new de.dfki.lt.nemex.f.selector.MiddleSelector(nemexFBean));
+		nemexFBean.setAligner(aligner);
+		nemexFBean.setSelector(new de.dfki.lt.nemex.f.selector.ScoreSelector(nemexFBean));
 
 		// set dictionary path
 		nemexFBean.setGazetteerFilePath(dictionary);
@@ -155,9 +156,11 @@ public class Test_NemexF_AmpCorpus {
 	public static void main(String[] args) throws IOException {
 
 		Test_NemexF_AmpCorpus testRun = new Test_NemexF_AmpCorpus();
-		testRun.initNemex(5, SimilarityMeasure.COSINE_SIMILARITY_MEASURE, 0.9);
+		testRun.initNemex(5, SimilarityMeasure.ED_SIMILARITY_MEASURE, 2.0, 
+				new de.dfki.lt.nemex.f.aligner.BucketCountPruneAligner());
 		
-		testRun.processAmpCorpusDir(testRun.inDir, testRun.outFile);
+		testRun.processAmpCorpusDir(testRun.inDir, 
+				"/local/data/AmplexorData/EMA_EPAR_nemexMatches_ED_2_bucket.txt");
 
 	}
 

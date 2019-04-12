@@ -45,12 +45,15 @@ public class Candidates {
 		this.getCandidates().put(entityIndex, candidates);
 	}
 	
-	public String toString(){
-		String printString ="";
-		for (long entityId : this.getCandidates().keySet()){
+	public String toString() {
+		String printString = "";
+		for (long entityId : this.getCandidates().keySet()) {
 			List<Candidate> candidates = this.getCandidates().get(entityId);
-			printString = printString + entityId+"="+NemexFIndex.getEntry(this.getGazetteerFilePath(), entityId) +"\n";
-			printString = printString + candidates.toString() +"\n";
+			if (!candidates.isEmpty()) {
+				printString = printString + entityId + "=" + NemexFIndex.getEntry(this.getGazetteerFilePath(), entityId)
+						+ "\n";
+				printString = printString + candidates.toString() + "\n";
+			}
 		}
 		return printString;
 	}

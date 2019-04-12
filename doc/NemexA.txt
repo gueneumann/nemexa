@@ -59,3 +59,11 @@ Idea of NemexA and using it on texts:
 - NOTE: NemexA uses n-grams for all similarity functions ; but does not consider edit distance;
 
 - But it considers the algorithm as complete, so no extra verification necessary.
+
+TOKEN Level approximation:
+
+- load nemex lexicon as single token
+
+- tokenize document and perform token-level lookup
+
+- I think I can combined it with NemexF, see doc/NemexF.txt

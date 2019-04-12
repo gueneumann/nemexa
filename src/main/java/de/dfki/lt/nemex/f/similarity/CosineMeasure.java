@@ -43,4 +43,5 @@ public class CosineMeasure extends AbstractSimilarityMeasure {
 		return (int)
 				(Math.min(ngramEntityLength, subListLength)/(similarityThreshold*similarityThreshold));
 	}
+	
 }
