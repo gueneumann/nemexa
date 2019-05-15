@@ -38,7 +38,7 @@ public class Test_NemexF_Amplexor {
 
 		// set dictionary path
 		nemexFBean.setGazetteerFilePath(
-				"/local/data/AmplexorData/CSD_Data_Delivery_v1/Controlled_Vocabulary/entriesType-nemex.txt");
+				"/Users/gune00/data/AmplexorData/CSD_Data_Delivery_v1/Controlled_Vocabulary/entriesType-nemex.txt");
 
 		// BEGIN - Setting parameters
 
@@ -61,7 +61,7 @@ public class Test_NemexF_Amplexor {
 		System.out.println("System time (msec): " + (time2 - time1));
 
 		// set query string
-		nemexFBean.setQueryString("The recommended starting dose of sevelamer carbonate is");
+		nemexFBean.setQueryString("The recommended starting dose of Sevelamer carbonate is");
 
 		// create ngram heap of input string
 		controller.setCharacterNgramFromQueryString(nemexFBean.getQueryString());
